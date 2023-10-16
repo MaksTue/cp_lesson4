@@ -1,21 +1,43 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>Lesson 4</title>
-    <meta charset="UTF-8"/>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MiniMaple</title>
+  </head>
+  <body>
+    <div>
+      <label for="polynomial">Enter polynomial expression:</label>
+      <input type="text" id="polynomial" placeholder="e.g., 4*x^3" />
 
-    <script src="src/index.js" type="module"></script>
-</head>
+      <label for="variable">Enter variable:</label>
+      <input type="text" id="variable" placeholder="e.g., x" />
 
-<body>
-<h1>Implement the symbolic diff here</h1>
-<div id="container">
+      <button id="calculateButton">Calculate</button>
 
-</div>
-<div>
-    <button id="demoButton">
-        Add something
-    </button>
-</div>
-</body>
+      <p id="result">Result:</p>
+    </div>
+
+    <script type="module">
+      import { MiniMaple } from "./src/MiniMaple.js";
+
+      const calculate = () => {
+        const polynomial = document.getElementById("polynomial").value;
+        const variable = document.getElementById("variable").value;
+
+        try {
+          const result = MiniMaple.differentiate(polynomial, variable);
+          document.getElementById("result").textContent = `Result: ${result}`;
+        } catch (error) {
+          document.getElementById(
+            "result"
+          ).textContent = `Error: ${error.message}`;
+        }
+      };
+
+      document
+        .getElementById("calculateButton")
+        .addEventListener("click", calculate);
+    </script>
+  </body>
 </html>
